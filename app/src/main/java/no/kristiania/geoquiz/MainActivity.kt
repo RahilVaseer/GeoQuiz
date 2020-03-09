@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
     private lateinit var nextButton: Button
+    private lateinit var previousButton: Button
     private lateinit var questionTextView: TextView
 
 
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
+        previousButton = findViewById(R.id.previous_button)
         questionTextView = findViewById(R.id.question_text_view)
 
 
@@ -49,6 +52,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
+            currentIndex = (currentIndex + 1) % questionBank.size
+            updateQuestion()
+        }
+
+        previousButton.setOnClickListener{
+            if(currentIndex == 0){
+                currentIndex;
+            } else {
+                currentIndex = (currentIndex - 1) % questionBank.size
+                updateQuestion()
+            }
+        }
+
+        question_text_view.setOnClickListener{
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
         }
